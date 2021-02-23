@@ -1,0 +1,11 @@
+{
+	"id": "nodebb-plugin-nbabot",
+	"url": "https://github.com/jdealla/nodebb-plugin-nbabot",
+	"library": "./library.js",
+	"hooks": [
+		{
+			"hook": "action:post.save", "method": "reply"
+		}
+	],
+	"templates": "static/templates"
+}

@@ -1,0 +1,31 @@
+{
+  "name": "nodebb-plugin-nbabot",
+  "version": "1.0.0",
+  "description": "NBA bot for NodeBB, used in 2KUniverse.com",
+  "main": "library.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jdealla/nodebb-plugin-nbabot"
+  },
+  "keywords": [
+    "nodebb",
+    "plugin",
+    "nba",
+    "bot"
+  ],
+  "author": {
+    "name": "jdealla",
+    "email": "jdealla@gmail.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jdealla/nodebb-plugin-nbabot/issues"
+  },
+  "readmeFilename": "README.md",
+  "nbbpm": {
+    "compatibility": "^1.15.0"
+  },
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
+}

@@ -3,10 +3,15 @@
 const Posts = require.main.require('./src/posts');
 const { create } = Posts;
 
-const { uid, bot, trigger} = require('./src/config');
-const build = require('./src/build');
-const api = require('./src/api');
+const axios = require('axios').default;
+const postRequest = (url, str) => axios({
+    method: 'post',
+    url,
+    data: {content: str },
+  });
 
+const { uid, bot, trigger} = require('./src/config');
+const templates = require('./src/templates/index')
 
 const getBotArguments = content => {
 	const arr = content.split('\n');
@@ -19,22 +24,6 @@ const getBotArguments = content => {
 	}, false );
 };
 
-const chooseAction = botArgs => {
-	const mainArg = botArgs[1];
-	let action = "scoreboard";
-	switch(mainArg) {
-		case 'scoreboard':
-		case 'scores':
-		case 'live':
-		case 'today':
-			action = 'scoreboard'
-			break;
-		default:
-			action = 'help'
-	  }
-	  return action;
-};
-
 const reply = async (postData) => {	
 	try {
 		const { post } = postData;
@@ -44,16 +33,18 @@ const reply = async (postData) => {
 			return;
 		}
 		else {
+			console.log('--------------JDD--------------- WERE IN');
+			let content;
 			const { tid } = post;
 			const toPid = post.pid;
-			const action = chooseAction(botArguments);
-			const args = botArguments.slice(2);
-			const res = await api[action](...args);
-			let content;
-			if (action !== 'help') {
-				content = build[action](res);
+			const res = await postRequest('http://localhost:8080/nbabot', botArguments.join(' '));
+			const { data } = res;
+			if (data.hasOwnProperty('message')) {
+				content = data.message;
 			} else {
-				content = res;
+				console.log(templates)
+				console.log(data.template)
+				content = templates[data.template](data);
 			}
 			const payload = { uid, tid, content, toPid };
 			create(payload);

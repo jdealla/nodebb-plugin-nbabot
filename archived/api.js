@@ -9,7 +9,6 @@ const scoreboard = async date => {
     try {
         const uri = `http://data.nba.net/10s/prod/v1/${date}/scoreboard.json`;
         const res = await get(uri);
-        console.log({'apiresponse': res.data})
         return { date, res };
     } catch (e) {
         console.log(e);

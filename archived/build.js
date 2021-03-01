@@ -81,7 +81,6 @@ const finishedScoreboard = finishedGames => {
 
 const scoreboard = data => {
     let { res, date } = data;
-    console.log('-----------------------JDD----------------------BUILD---------------', {res})
     try {
         date = formatDate(date); 
         const { games } = res.data;

@@ -10,7 +10,7 @@ const postRequest = (url, str) => axios({
     data: {content: str },
   });
 
-const { uid, bot, trigger} = require('./src/config');
+const { uid, bot, trigger, apiBase } = require('./src/config');
 const templates = require('./src/templates/index')
 
 const getBotArguments = content => {
@@ -33,17 +33,17 @@ const reply = async (postData) => {
 			return;
 		}
 		else {
-			console.log('--------------JDD--------------- WERE IN');
+			// console.log('--------------JDD--------------- WERE IN');
 			let content;
 			const { tid } = post;
 			const toPid = post.pid;
-			const res = await postRequest('http://localhost:8080/nbabot', botArguments.join(' '));
+			const res = await postRequest(`${apiBase}/nbabot`, botArguments.join(' '));
 			const { data } = res;
 			if (data.hasOwnProperty('message')) {
 				content = data.message;
 			} else {
-				console.log(templates)
-				console.log(data.template)
+				// console.log(templates)
+				// console.log(data.template)
 				content = templates[data.template](data);
 			}
 			const payload = { uid, tid, content, toPid };

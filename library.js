@@ -33,7 +33,6 @@ const reply = async (postData) => {
 			return;
 		}
 		else {
-			// console.log('--------------JDD--------------- WERE IN');
 			let content;
 			const { tid } = post;
 			const toPid = post.pid;
@@ -42,8 +41,6 @@ const reply = async (postData) => {
 			if (data.hasOwnProperty('message')) {
 				content = data.message;
 			} else {
-				// console.log(templates)
-				// console.log(data.template)
 				content = templates[data.template](data);
 			}
 			const payload = { uid, tid, content, toPid };

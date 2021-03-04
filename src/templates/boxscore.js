@@ -77,7 +77,7 @@ const boxscore = data => {
 
     // TEMPLATE
     let result;
-    result = `### ${ vTeam.triCode } (${ vTeam.win } - ${ vTeam.loss } ) @ ${ hTeam.triCode } (${ hTeam.win } - ${ hTeam.loss } )\n`;
+    result = `### ${ vTeam.triCode } (${ vTeam.win } - ${ vTeam.loss }) @ ${ hTeam.triCode } (${ hTeam.win } - ${ hTeam.loss })\n`;
     result += `#### ${ arena.name } in ${ arena.city }\n`;
     result += `**${ status.toUpperCase() } ${ time } (start time: ${startTimeEastern} on ${date})**\n\n\n`;
     result += `| TEAM | 1st | 2nd | 3rd | 4th | Total |\n`;

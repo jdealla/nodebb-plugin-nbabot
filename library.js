@@ -2,16 +2,15 @@
 
 const Posts = require.main.require('./src/posts');
 const { create } = Posts;
+const { uid, bot, trigger, apiBase, token } = require('./src/config');
 
 const axios = require('axios').default;
 const postRequest = (url, str) => axios({
     method: 'post',
     url,
-    data: {content: str },
-  });
-
-const { uid, bot, trigger, apiBase } = require('./src/config');
-const templates = require('./src/templates/index')
+	headers : { Authorization: `Bearer ${token}`},
+    data: { content: str },
+});
 
 const getBotArguments = content => {
 	const arr = content.split('\n');
@@ -33,16 +32,11 @@ const reply = async (postData) => {
 			return;
 		}
 		else {
-			let content;
 			const { tid } = post;
 			const toPid = post.pid;
-			const res = await postRequest(`${apiBase}/nbabot`, botArguments.join(' '));
+			const res = await postRequest(`${apiBase}/${bot}/content`, botArguments.join(' '));
 			const { data } = res;
-			if (data.hasOwnProperty('message')) {
-				content = data.message;
-			} else {
-				content = templates[data.template](data);
-			}
+			const content = data.content;
 			const payload = { uid, tid, content, toPid };
 			create(payload);
 		}

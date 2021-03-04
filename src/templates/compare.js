@@ -3,7 +3,7 @@ const round = num => Math.round(num * 100).toFixed(2);
 const getCalculatedAverages = averages => {
     const { fgm, fga, fg3m, fg3a, fta, turnover, pts } = averages;
     const twoPper = ((fgm - fg3m) / (fga - fg3a) * 100 ).toFixed(2);
-    const efgp = (( (fgm - fg3m) + 1.5 * fg3m) / fga).toFixed(2);
+    const efgp = ((( (fgm - fg3m) + 1.5 * fg3m) / fga) * 100).toFixed(2);
     const tsp = ((pts / ( 2 * (fga + 0.44 * fta))) * 100).toFixed(2);
     const tovp = (100 * turnover / (fga + 0.44 * fta + turnover)).toFixed(2);
     return { twoPper, efgp, tsp, tovp, }
@@ -34,7 +34,7 @@ const compare = data => {
     response  += `| FG% | ${round(playerOneAverages.fg_pct)} | ${round(playerTwoAverages.fg_pct)}|\n`;
     response  += `| FT% | ${round(playerOneAverages.ft_pct)} | ${round(playerTwoAverages.ft_pct)}|\n`;
     response  += `| 2P% | ${playerOneAverages.twoPper} | ${playerTwoAverages.twoPper}|\n`;
-    response  += `| 3P% | ${round(playerOneAverages.fg3_pct)} | ${(playerTwoAverages.fg3_pct)}|\n`;
+    response  += `| 3P% | ${round(playerOneAverages.fg3_pct)} | ${round(playerTwoAverages.fg3_pct)}|\n`;
     response  += `| eFG% | ${playerOneAverages.efgp} | ${playerTwoAverages.efgp}|\n`;
     response  += `| TS% | ${playerOneAverages.tsp} | ${playerTwoAverages.tsp}|\n`;
     response  += `| TOV% | ${playerOneAverages.tovp} | ${playerTwoAverages.tovp}|\n`;

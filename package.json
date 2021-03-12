@@ -1,6 +1,6 @@
 {
   "name": "@jdealla/nodebb-plugin-nbabot",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "NBA bot for NodeBB, used in 2KUniverse.com",
   "main": "library.js",
   "repository": {

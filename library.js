@@ -5,11 +5,11 @@ const { create } = Posts;
 const { uid, bot, trigger, apiBase, token } = require('./src/config');
 
 const axios = require('axios').default;
-const postRequest = (url, str) => axios({
+const postRequest = (url, str, postData ) => axios({
     method: 'post',
     url,
 	headers : { Authorization: `Bearer ${token}`},
-    data: { content: str },
+    data: { content: str, postData },
 });
 
 const getBotArguments = content => {
@@ -34,7 +34,7 @@ const reply = async (postData) => {
 		else {
 			const { tid } = post;
 			const toPid = post.pid;
-			const res = await postRequest(`${apiBase}/${bot}/content`, botArguments.join(' '));
+			const res = await postRequest(`${apiBase}/${bot}/content`, botArguments.join(' '), postData );
 			const { data } = res;
 			const content = data.content;
 			const payload = { uid, tid, content, toPid };

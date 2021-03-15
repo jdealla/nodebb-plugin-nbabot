@@ -2,7 +2,7 @@
 
 const Posts = require.main.require('./src/posts');
 const { create } = Posts;
-const { uid, bot, trigger, apiBase, token } = require('./src/config');
+const { uid, bot, trigger, apiBase, token, aliases } = require('./src/config');
 
 const axios = require('axios').default;
 const postRequest = (url, str, postData ) => axios({
@@ -13,12 +13,15 @@ const postRequest = (url, str, postData ) => axios({
 });
 
 const getBotArguments = content => {
+	const botTriggers = aliases.map( alias => trigger + alias );
 	const arr = content.split('\n');
 	return arr.reduce( (acc, str) => {
-		str = str.toLowerCase().trim();
-		if (str.includes(trigger + bot) && !str.includes('>')) {
-			acc = str.split(' ');
-		}
+		botTriggers.forEach( botTrigger => {
+			str = str.toLowerCase().trim();
+			if (str.includes(botTrigger) && !str.includes('>')) {
+				acc = str.split(' ');
+			}
+		});
 		return acc;
 	}, false );
 };

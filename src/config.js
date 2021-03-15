@@ -2,8 +2,9 @@ const config =  {
     uid: 203,
     trigger: '!',
     bot: 'nbabot',
-    apiBase: 'https://bots.2kuniverse.com',
-    token: "",
+    aliases: ['nbabot', 'nba'],
+    apiBase: 'http://localhost:8080',
+    token: "local2ku",
 }
 
 module.exports = config;
